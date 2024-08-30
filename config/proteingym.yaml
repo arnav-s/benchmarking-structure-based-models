@@ -1,0 +1,11 @@
+proteingym_dir: ProteinGym/
+
+model_names:
+  - ProtSSN (ensemble)
+  - SaProt (650M)
+  - TranceptEVE L
+  - VESPA
+  - GEMME
+  - ESM-IF1
+
+ssemb_score_file_path: output/df_total_proteingym_0.csv

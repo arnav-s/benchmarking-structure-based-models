@@ -1,38 +1,23 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-import sys, os, argparse
+import sys, os
+import yaml
 
 
 def main():
-    parser = argparse.ArgumentParser()
+    with open("config/proteingym.yaml") as yaml_file:
+        args = yaml.safe_load(yaml_file)
 
-    parser.add_argument(
-        "--model_name",
-        type=str,
-        help="Provide model name for which scores should be computed",
-    )
-    parser.add_argument(
-        "--proteingym_dir",
-        type=str,
-        default="./ProteinGym/",
-        help="Path of proteinGym repository",
-        required=False,
-    )
-    # TODO: Remove this argument if we're able to run the entirety of ProteinGym
-    parser.add_argument(
-        "--ssemb_score_file_path",
-        type=str,
-        help="Path to score file for SSEmb model. This is needed to short list DMS assays",
-    )
+    proteingym_path = args["proteingym_dir"]
 
-    args = parser.parse_args()
+    if not os.path.isdir(proteingym_path):
+        print(f"ProteinGym repository not found at path: {proteingym_path}\n\
+                Please run scripts/setup_proteingym.sh from the root directory of the project.")
+        sys.exit(1)
 
-    print(f"Computing Scores for {args.model_name}")
+    model_names = args["model_names"]
 
-    proteingym_path = args.proteingym_dir
-    model_name = args.model_name
-
-    print(f"Computing Scores for {model_name}")
+    print(f"Computing Scores for {model_names}")
 
     benchmark_df = pd.read_csv(
         proteingym_path
@@ -41,25 +26,26 @@ def main():
     )
 
     dms_assays = set(
-        pd.read_csv(args.ssemb_score_file_path).dropna()["dms_id"].unique()
+        pd.read_csv(args["ssemb_score_file_path"]).dropna()["dms_id"].unique()
     )
 
-    model_score_df = benchmark_df[
-        [model_name, "DMS ID", "UniProt ID", "Selection Type", "Taxon"]
-    ]
-    model_score_df = model_score_df[model_score_df["DMS ID"].isin(dms_assays)]
+    for model_name in model_names:
+        model_score_df = benchmark_df[
+            [model_name, "DMS ID", "UniProt ID", "Selection Type", "Taxon"]
+        ]
+        model_score_df = model_score_df[model_score_df["DMS ID"].isin(dms_assays)]
 
-    average_scores_by_function = (
-        model_score_df.groupby(["UniProt ID", "Selection Type"])
-        .mean()
-        .groupby("Selection Type")
-        .mean()
-        .round(4)
-    )
+        average_scores_by_function = (
+            model_score_df.groupby(["UniProt ID", "Selection Type"])
+            .mean()
+            .groupby("Selection Type")
+            .mean()
+            .round(4)
+        )
 
-    print(average_scores_by_function)
+        print(average_scores_by_function)
 
-    print(average_scores_by_function.mean().round(4))
+        print(average_scores_by_function.mean().round(4))
 
 
 if __name__ == "__main__":
