@@ -6,21 +6,19 @@ import yaml
 
 
 def main():
-    with open("config/proteingym.yaml") as yaml_file:
+    with open("config/ssemb.yaml") as yaml_file:
         args = yaml.safe_load(yaml_file)
 
-    proteingym_path = args["proteingym_dir"]
+    proteingym_ref_file = args["proteingym_ref_file"]
 
-    if not os.path.isdir(proteingym_path):
-        print(f"ProteinGym repository not found at path: {proteingym_path}\n\
-                Please run scripts/setup_proteingym.sh from the root directory of the project.")
+    if not os.path.isfile(proteingym_ref_file):
+        print(f"ProteinGym repository not found at path: {proteingym_ref_file}\n\
+                Please run scripts/fetch_proteingym_assets.sh from the root directory of the project.")
         sys.exit(1)
 
-    proteingym_path = args["proteingym_dir"]
-
-    reference_df = pd.read_csv(
-        proteingym_path + os.sep + "reference_files/DMS_substitutions.csv"
-    ).rename(columns={"coarse_selection_type": "Selection Type"})
+    reference_df = pd.read_csv(proteingym_ref_file).rename(
+        columns={"coarse_selection_type": "Selection Type"}
+    )
 
     ssemb_score_file = (
         pd.read_csv(args["ssemb_score_file_path"])

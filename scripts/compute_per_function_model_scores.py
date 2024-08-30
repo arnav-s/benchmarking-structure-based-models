@@ -8,10 +8,9 @@ def main():
     with open("config/proteingym.yaml") as yaml_file:
         args = yaml.safe_load(yaml_file)
 
-    proteingym_path = args["proteingym_dir"]
-
-    if not os.path.isdir(proteingym_path):
-        print(f"ProteinGym repository not found at path: {proteingym_path}\n\
+    proteingym_bm_file = args["proteingym_bm_file"]
+    if not os.path.isfile(proteingym_bm_file):
+        print(f"ProteinGym repository not found at path: {proteingym_bm_file}\n\
                 Please run scripts/setup_proteingym.sh from the root directory of the project.")
         sys.exit(1)
 
@@ -19,11 +18,7 @@ def main():
 
     print(f"Computing Scores for {model_names}")
 
-    benchmark_df = pd.read_csv(
-        proteingym_path
-        + os.sep
-        + "benchmarks/DMS_zero_shot/substitutions/Spearman/DMS_substitutions_Spearman_DMS_level.csv"
-    )
+    benchmark_df = pd.read_csv(args["proteingym_bm_file"])
 
     dms_assays = set(
         pd.read_csv(args["ssemb_score_file_path"]).dropna()["dms_id"].unique()

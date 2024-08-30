@@ -1,3 +1,2 @@
-proteingym_dir: ProteinGym/
-
-ssemb_score_file_path: output/df_total_proteingym_0.csv
+proteingym_ref_file: assets/DMS_substitutions_ref_file.csv
+ssemb_score_file_path: assets/df_total_proteingym_0.csv
