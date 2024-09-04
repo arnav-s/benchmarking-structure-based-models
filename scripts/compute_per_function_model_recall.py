@@ -5,7 +5,7 @@ import yaml
 
 
 def main():
-    with open("config/proteingym_spearman.yaml") as yaml_file:
+    with open("config/proteingym_recall.yaml") as yaml_file:
         args = yaml.safe_load(yaml_file)
 
     proteingym_bm_file = args["proteingym_bm_file"]
