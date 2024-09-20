@@ -15,12 +15,18 @@ The conda environment can be setup using
   conda env create -f environment.yml
 ```
 ### SSEmb setup
-* Download the test.tar.gz file from Zenodo and place it in the root directory of this repo.
+* Download the test.tar.gz file from Zenodo and place it in the assets directory of this repo.
 * Use `scripts/setup_ssemb.sh` to setup the data and code.
 * Follow instructions on the [SSEmb Github](https://github.com/KULL-Centre/_2023_Blaabjerg_SSEmb) to run proteinGym assays.
 You can follow the instructions on:
 
-### ProteinGym setup
+### ProteinGym setup for running ESM-IF1 with experimental structures
+
+* Download the experimental_struct_artifacts.tar.gz file from Zenodo and place it in the assets directory of this repo.
+* Use `scripts/setup_proteinGym.sh` to setup the data and code.
+* Follow instructions on the [ProteinGym Github](https://github.com/OATML-Markslab/ProteinGym) to setup scipts/zero_shot_config.sh within ProteinGym.
+* cd into the cloned `ProteinGym/scripts/scoring_DMS_zero_shot directory`. Run `sh score_multichain_structs_esm.sh` to generate ESM-IF1 scores for experimental
+structures.
 
 ## Accessing Data:
 
