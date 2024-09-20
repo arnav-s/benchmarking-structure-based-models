@@ -8,6 +8,10 @@ This is a repository of code needed to replicate benchmarks of structure based m
   * [Accessing Data](#access_data)
 
 ## Setup
+  The conda environment can be setup using 
+  ```
+    conda env create -f environment.yml
+  ```
 
 ## Accessing Data:
 
