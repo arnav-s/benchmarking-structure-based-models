@@ -1,5 +1,5 @@
 # Exploring zero-shot structure-based protein fitness prediction
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13819824.svg)](https://doi.org/10.5281/zenodo.13819824)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13819823.svg)](https://doi.org/10.5281/zenodo.13819823)
 
 This is a repository of code needed to replicate benchmarks of structure based models in ProteinGym
 
@@ -29,7 +29,7 @@ wget https://marks.hms.harvard.edu/proteingym/zero_shot_substitutions_scores.zip
 These scores can be extracted to the location of your choosing and then each script can be pointed to this location.
 
 ### Generated Data:
-Data to run experiments can be found in our [Zenodo repository](https://doi.org/10.5281/zenodo.13819824).
+Data to run experiments can be found in our [Zenodo repository](https://doi.org/10.5281/zenodo.13819823).
 
   * `experimental_struct_artifacts` contains the experimentally determined structures
 for ProteinGym assays used in our analysis along with the reference file needed to
