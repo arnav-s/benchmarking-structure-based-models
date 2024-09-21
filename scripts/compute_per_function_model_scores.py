@@ -23,6 +23,7 @@ def main():
     if not os.path.isfile(args["ssemb_score_file_path"]):
         print(f"SSEmb results not found at path: {proteingym_bm_file}\n\
                 Please download results.tar.gz from Zenodo amd extract them in the assets directory.")
+        sys.exit(1)
 
     dms_assays = set(
         pd.read_csv(args["ssemb_score_file_path"]).dropna()["dms_id"].unique()

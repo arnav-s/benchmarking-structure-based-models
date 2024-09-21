@@ -1,6 +1,5 @@
 #! /bin/bash
 
-set -e
 
 DIRECTORY="ProteinGym"
 
@@ -23,4 +22,17 @@ mv assets/experimental_structs_artifacts/scoring_ESM_IF1_multichain_substitution
 mv assets/experimental_structs_artifacts/DMS_substitutions_hetero.csv ProteinGym/reference_files/DMS_substitutions_hetero.csv
 mkdir ProteinGym/proteingym/baselines/esm/model_checkpoints/
 
+mkdir ProteinGym/data && cd ProteinGym/data
+if [ ! -f zero_shot_substitutions_scores.zip ]; then
+    wget https://marks.hms.harvard.edu/proteingym/zero_shot_substitutions_scores.zip
+fi
+if [ ! -f DMS_ProteinGym_substitutions.zip ]; then
+    wget https://marks.hms.harvard.edu/proteingym/DMS_ProteinGym_substitutions.zip
+fi
+mkdir zero_shot_substitutions_scores
+unzip zero_shot_substitutions_scores.zip -d zero_shot_substitutions_scores
+mkdir DMS_ProteinGym_substitutions
+unzip DMS_ProteinGym_substitutions.zip -d DMS_ProteinGym_substitutions
+
+cd ../../
 
