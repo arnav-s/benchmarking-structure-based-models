@@ -43,6 +43,11 @@ Data to run experiments can be found in our [Zenodo repository](https://doi.org/
   * `experimental_struct_artifacts.tar.gz` contains the experimentally determined structures
 for ProteinGym assays used in our analysis along with the reference file needed to
 generate ESM inverse folding predictions for these structures in ProteinGym. This file compressed file contains:
+    * Experimental structures for ProteinGym assays. These structures were filtered using logic similar to that used in
+    the ["Structure-informed protein engineering with equivariant graph neural networks" repository](https://github.com/semiluna/partIII-amino-acid-prediction).
+    * Modified Files for running ESM on multichain complexes. The function is similar to that in the [ESM repository](https://github.com/facebookresearch/esm/blob/main/examples/inverse_folding/score_log_likelihoods.py)
+    * reference file to map all DMS ids to their pdb files
+    * script to run inference for each DMS id in the reference file.
 
   * `results.tar.gz` contains the prediction results obtained by running SSEmb on the 216
 ProteinGym assays being considered in this study. File compressed are:
