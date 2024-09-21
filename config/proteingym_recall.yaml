@@ -7,4 +7,4 @@ model_names:
   - GEMME
   - ESM-IF1
 
-ssemb_score_file_path: assets/df_total_proteingym_1.csv
+ssemb_score_file_path: assets/results/df_total_proteingym_1.csv

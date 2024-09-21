@@ -11,7 +11,7 @@ def main():
     proteingym_bm_file = args["proteingym_bm_file"]
     if not os.path.isfile(proteingym_bm_file):
         print(f"ProteinGym repository not found at path: {proteingym_bm_file}\n\
-                Please run scripts/setup_proteingym.sh from the root directory of the project.")
+                Please run scripts/fetch_proteingym_assets.sh from the root directory of the project.")
         sys.exit(1)
 
     model_names = args["model_names"]
@@ -19,6 +19,11 @@ def main():
     print(f"Computing Scores for {model_names}")
 
     benchmark_df = pd.read_csv(args["proteingym_bm_file"])
+
+    if not os.path.isfile(args["ssemb_score_file_path"]):
+        print(f"SSEmb results not found at path: {proteingym_bm_file}\n\
+                Please download results.tar.gz from Zenodo amd extract them in the assets directory.")
+        sys.exit(1)
 
     dms_assays = set(
         pd.read_csv(args["ssemb_score_file_path"]).dropna()["dms_id"].unique()
@@ -35,10 +40,9 @@ def main():
             .mean()
             .groupby("Selection Type")
             .mean()
-            .round(4)
         )
 
-        print(average_scores_by_function)
+        print(average_scores_by_function.round(4))
 
         print(average_scores_by_function.mean().round(4))
 

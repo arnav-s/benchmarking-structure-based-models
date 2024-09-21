@@ -20,6 +20,10 @@ def main():
 
     benchmark_df = pd.read_csv(args["proteingym_bm_file"])
 
+    if not os.path.isfile(args["ssemb_score_file_path"]):
+        print(f"SSEmb results not found at path: {proteingym_bm_file}\n\
+                Please download results.tar.gz from Zenodo amd extract them in the assets directory.")
+
     dms_assays = set(
         pd.read_csv(args["ssemb_score_file_path"]).dropna()["dms_id"].unique()
     )
@@ -35,10 +39,9 @@ def main():
             .mean()
             .groupby("Selection Type")
             .mean()
-            .round(4)
         )
 
-        print(average_scores_by_function)
+        print(average_scores_by_function.round(4))
 
         print(average_scores_by_function.mean().round(4))
 
